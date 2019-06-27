@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SJSU GO</string>
+    <string name="textBox">0</string>
+    <string name="Toast">Toast</string>
+    <string name="Count">Count</string>
+    <string name="Random">Random</string>
 </resources>
