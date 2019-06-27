@@ -10,3 +10,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
+//this is a test comment to see if GitHub vcs is working
