@@ -4,4 +4,5 @@
     <string name="Toast">Toast</string>
     <string name="Count">Count</string>
     <string name="Random">Random</string>
+    <string name="random_heading">Here is a random number between 0 and %1d</string>
 </resources>
