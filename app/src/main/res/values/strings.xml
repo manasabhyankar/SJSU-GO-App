@@ -3,4 +3,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="sjsu_id">SJSU ID</string>
     <string name="sjsu_pass">SJSU Password</string>
+    <string name="login_text">Log In</string>
+    <string name="signup_redirect">Don\'t have an account? Sign Up!</string>
+
 </resources>
