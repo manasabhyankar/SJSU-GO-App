@@ -1,7 +1,9 @@
 package com.example.sjsugo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 
@@ -42,5 +44,19 @@ class SignUpActivity : AppCompatActivity() {
          ******/
     }
 
+    fun cancelClick(view: View) {
+        //create an Intent to go back to Log In activity
+        val cancelIntent = Intent(this, LoginActivity::class.java)
 
+        //Going back to the start activity
+        startActivity(cancelIntent)
+    }
+
+    fun signupClick(view: View) {
+        //create an Intent to go back to Log In activity
+        val signupIntent = Intent(this, DashboardActivity::class.java)
+
+        //Going back to the start activity
+        startActivity(signupIntent)
+    }
 }

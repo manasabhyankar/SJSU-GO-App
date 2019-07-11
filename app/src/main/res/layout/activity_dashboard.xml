@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        tools:context=".DashboardActivity">
+
+    <Button
+            android:id="@+id/logoutButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="63dp"
+            android:layout_height="35dp"
+            android:background="@android:color/white"
+            android:onClick="logoutClick"
+            android:text="@string/log_out"
+            android:textColor="#03A9FA"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/addeventButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="101dp"
+            android:layout_height="38dp"
+            android:background="@android:color/white"
+            android:text="@string/add_event"
+            android:textColor="#03A9FA"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/sjsugoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="SJSU GO"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/addeventButton"
+            app:layout_constraintHorizontal_bias="0.609"
+            app:layout_constraintStart_toEndOf="@+id/logoutButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/welcometext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Welcome to the GO Program!"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sjsugoTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

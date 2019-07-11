@@ -4,7 +4,7 @@
     <string name="sjsu_id">SJSU ID</string>
     <string name="sjsu_pass">SJSU Password</string>
     <string name="login_text">Log In</string>
-    <string name="signup_redirect">Don\'t have an account? Sign Up!</string>
+    <string name="signup_redirect">Don\'t have an account?</string>
     <string name="cancel">Cancel</string>
     <string name="sign_up">Sign Up</string>
     <string name="sjsu_email">SJSU Email</string>
@@ -12,6 +12,8 @@
     <string name="last_name">Last Name</string>
     <string name="sjsu_major">Major</string>
     <string name="sjsu_year">Academic Year</string>
+    <string name="log_out">Log Out</string>
+    <string name="add_event">Add Event</string>
 
     <string-array name="departmentMajor">
         <item>Aerospace Engineering</item>
@@ -39,4 +41,8 @@
         <item>2011</item>
         <item>2010</item>
     </string-array>
+    <string name="title_activity_test">test</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

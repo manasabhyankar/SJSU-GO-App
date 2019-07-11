@@ -4,16 +4,19 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         tools:context=".SignUpActivity">
 
     <Button
             android:id="@+id/cancelButton"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="63dp"
             android:layout_height="35dp"
             android:background="@android:color/white"
             android:text="@android:string/cancel"
             android:textColor="#03A9F4"
             android:textSize="14sp"
+            android:onClick="cancelClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,6 +139,7 @@
             android:backgroundTint="#005682"
             android:text="@string/sign_up"
             android:textSize="14sp"
+            android:onClick="signupClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
