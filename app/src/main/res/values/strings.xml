@@ -15,7 +15,7 @@
     <string name="log_out">Log Out</string>
     <string name="add_event">Add Event</string>
 
-    <string-array name="departmentMajor">
+    <string-array name="department_major">
         <item>Aerospace Engineering</item>
         <item>Aviation and Technology</item>
         <item>Biomedical Engineering</item>
@@ -26,11 +26,11 @@
         <item>General Engineering</item>
         <item>Industrial and Systems Engineering</item>
         <item>Mechanical Engineering</item>
-        <item>Graduate and Extended Studeies</item>
+        <item>Graduate and Extended Studies</item>
         <item>Other</item>
     </string-array>
 
-    <string-array name="academicYear">
+    <string-array name="academic_year">
         <item>2019</item>
         <item>2018</item>
         <item>2017</item>
@@ -38,6 +38,7 @@
         <item>2015</item>
         <item>2014</item>
         <item>2013</item>
+        <item>2012</item>
         <item>2011</item>
         <item>2010</item>
     </string-array>

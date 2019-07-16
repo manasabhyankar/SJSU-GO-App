@@ -49,42 +49,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:954003871359:android:38d7cf2575d27bc6",
-        "android_client_info": {
-          "package_name": "com.sjsugo.SJSUGOApp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "954003871359-i4la7lvianu2j29krq0eeeq2bvjstr8o.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBf8NF0RC5vJ-zBhfa6gnE2Ls-YaseOBPA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "954003871359-i4la7lvianu2j29krq0eeeq2bvjstr8o.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "954003871359-cjn34t8cd39114pdoimd0vtu3g7leqc1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.sjsugo.SJSUGOApp"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"

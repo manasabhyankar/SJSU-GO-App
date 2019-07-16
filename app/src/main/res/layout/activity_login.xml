@@ -12,19 +12,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="108dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/sjsu_id"
+            app:layout_constraintBottom_toTopOf="@+id/login_email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/go_logo"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintHorizontal_bias="0.493" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/go_logo" tools:ignore="ContentDescription"/>
 
     <Button
-            android:id="@+id/button"
+            android:id="@+id/log_in_button"
             android:layout_width="273dp"
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
@@ -48,63 +46,46 @@
             android:layout_marginBottom="8dp"
             android:text="@string/signup_redirect"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/directtosignup"
+            app:layout_constraintEnd_toStartOf="@+id/direct_to_signup"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/log_in_button"
             app:layout_constraintVertical_bias="0.013" />
 
     <Button
-            android:id="@+id/directtosignup"
+            android:id="@+id/direct_to_signup"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="89dp"
             android:layout_height="37dp"
             android:layout_marginEnd="80dp"
             android:background="#FFFFFF"
-            android:onClick="signupClick"
+            android:onClick="signUpClick"
             android:text="@string/sign_up"
             android:textColor="#00BCD4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-            app:layout_constraintVertical_bias="0.088" />
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/sjsu_id"
-            android:layout_width="187dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/sjsu_pass"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="112dp"
-                tools:layout_editor_absoluteY="281dp"></com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/sjsu_id" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/log_in_button"
+            app:layout_constraintVertical_bias="0.088"/>
 
     <EditText
-            android:id="@+id/sjsu_pass"
+            android:id="@+id/login_pass"
             android:layout_width="187dp"
             android:layout_height="55dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/sjsu_pass"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginBottom="8dp" android:ems="10"
+            android:hint="@string/sjsu_pass" android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/log_in_button" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <EditText
+            android:id="@+id/login_email"
+            android:layout_width="187dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            android:ems="10" android:hint="@string/sjsu_email"
+            android:inputType="textEmailAddress" app:layout_constraintBottom_toTopOf="@+id/login_pass"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
