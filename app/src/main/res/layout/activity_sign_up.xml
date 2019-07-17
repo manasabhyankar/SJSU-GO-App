@@ -16,97 +16,80 @@
             android:text="@android:string/cancel"
             android:textColor="#03A9F4"
             android:textSize="14sp"
-            android:onClick="cancelClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-            android:id="@+id/signup_email"
-            android:layout_width="187dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="4dp"
-            android:ems="10" android:hint="@string/sjsu_email"
-            android:inputType="textEmailAddress" android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/signup_id"/>
     <TextView
             android:id="@+id/signup_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/sign_up"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/signup_id"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.391"
-            app:layout_constraintStart_toEndOf="@+id/cancel_button"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintHorizontal_bias="0.388" app:layout_constraintStart_toEndOf="@+id/cancel_button"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
     <EditText
             android:id="@+id/signup_id"
             android:layout_width="187dp"
             android:layout_height="55dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="@string/sjsu_id"
+            android:importantForAutofill="no"
             android:inputType="number"
-            android:textSize="12sp"
+            android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/signup_email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/signup_page"/>
-
+            app:layout_constraintStart_toStartOf="parent"/>
+    <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="187dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="12dp" android:ems="10"
+            android:hint="@string/sjsu_email" android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/signup_pass"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
     <EditText
             android:id="@+id/signup_pass"
             android:layout_width="187dp"
             android:layout_height="55dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="@string/sjsu_pass"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/signup_email"
-            app:layout_constraintVertical_bias="0.0"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstName"
+            android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/first_name"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+    <EditText
+            android:id="@+id/first_name"
             android:layout_width="187dp"
             android:layout_height="55dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_pass">
-
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/first_name_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/first_name"
-                android:textSize="12sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastName"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:importantForAutofill="no" android:inputType="textPersonName"
+            android:textSize="12sp" app:layout_constraintBottom_toTopOf="@+id/last_name"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+    <EditText
+            android:id="@+id/last_name"
             android:layout_width="187dp"
             android:layout_height="55dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/firstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/last_name"
-                android:textSize="12sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="48dp"
+            android:ems="10" android:hint="@string/last_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/department_spinner" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <Spinner
             android:id="@+id/department_spinner"
             android:layout_width="256dp"
             android:layout_height="25dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:entries="@array/department_major"
             android:hint="@string/sjsu_major"
@@ -114,25 +97,24 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/academic_year_dropdown" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastName" app:layout_constraintVertical_bias="0.0"/>
+    />
 
     <Spinner
             android:id="@+id/academic_year_dropdown"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="92dp"
+            android:layout_marginBottom="60dp"
             android:entries="@array/academic_year"
             android:prompt="@string/sjsu_year"
-            app:layout_constraintBottom_toTopOf="@+id/signup_button"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@+id/signup_button" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
             android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="92dp"
+            android:layout_marginBottom="52dp"
             android:backgroundTint="#005682"
-            android:onClick="signUpClick"
             android:text="@string/sign_up"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

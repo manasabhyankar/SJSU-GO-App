@@ -14,7 +14,7 @@
     <string name="sjsu_year">Academic Year</string>
     <string name="log_out">Log Out</string>
     <string name="add_event">Add Event</string>
-
+    <string name="dashboard_welcome_message">Welcome to your GO Dashboard!</string>
     <string-array name="department_major">
         <item>Aerospace Engineering</item>
         <item>Aviation and Technology</item>

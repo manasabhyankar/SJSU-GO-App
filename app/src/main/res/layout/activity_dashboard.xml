@@ -8,20 +8,20 @@
         tools:context=".DashboardActivity">
 
     <Button
-            android:id="@+id/logoutButton"
+            android:id="@+id/logout_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="63dp"
             android:layout_height="35dp"
+            android:layout_marginStart="4dp"
             android:background="@android:color/white"
-            android:onClick="logoutClick"
+            android:focusableInTouchMode="true"
             android:text="@string/log_out"
             android:textColor="#03A9FA"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="14sp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-            android:id="@+id/addeventButton"
+            android:id="@+id/add_event_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="101dp"
             android:layout_height="38dp"
@@ -29,11 +29,12 @@
             android:text="@string/add_event"
             android:textColor="#03A9FA"
             android:textSize="14sp"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/sjsugoTitle"
+            android:id="@+id/sjsu_go_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -41,20 +42,20 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/addeventButton"
+            app:layout_constraintEnd_toStartOf="@+id/add_event_button"
             app:layout_constraintHorizontal_bias="0.609"
-            app:layout_constraintStart_toEndOf="@+id/logoutButton"
+            app:layout_constraintStart_toEndOf="@+id/logout_button"
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/welcometext"
+            android:id="@+id/dashboard_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="Welcome to the GO Program!"
+            android:text="@string/dashboard_welcome_message"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sjsugoTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/sjsu_go_title"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
