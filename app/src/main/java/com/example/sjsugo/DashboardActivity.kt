@@ -19,6 +19,10 @@ class DashboardActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         val logoutBtn = findViewById<Button>(R.id.logout_button)
         logoutBtn.setOnClickListener { doLogOut() }
+
+//      THIS WILL DIRECT YOU TO THE ADD EVENT ACTIVITY
+        val addeventBtn = findViewById<Button>(R.id.add_event_button)
+        addeventBtn.setOnClickListener{startActivity(Intent(this, SubmitEventActivity::class.java))}
     }
     override fun onBackPressed() {
         //do nothing
