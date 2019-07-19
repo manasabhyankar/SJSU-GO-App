@@ -4,11 +4,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import org.w3c.dom.Text
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -19,6 +22,11 @@ class DashboardActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         val logoutBtn = findViewById<Button>(R.id.logout_button)
         logoutBtn.setOnClickListener { doLogOut() }
+
+        val actualName = intent?.getStringExtra("userName")
+        Log.d("Info:", "something: "+ actualName)
+        findViewById<TextView>(R.id.dashboard_welcome).text = "Welcome " + actualName + "!"
+
     }
     override fun onBackPressed() {
         //do nothing
@@ -33,7 +41,7 @@ class DashboardActivity : AppCompatActivity() {
         val logout_prompt = AlertDialog.Builder(this)
         logout_prompt.setTitle("Log out?")
         logout_prompt.setMessage("Do you wish to log out?")
-        logout_prompt.setPositiveButton("Log Out") {dialog, which ->
+        logout_prompt.setPositiveButton("Log Out") {_, _ ->
             firebaseAuth.signOut()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
