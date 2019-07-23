@@ -22,4 +22,6 @@
             android:name="com.example.sjsugo.ui.notifications.NotificationsFragment"
             android:label="@string/title_notifications"
             tools:layout="@layout/fragment_notifications" />
+    <fragment android:id="@+id/navigation_feedback" android:name="com.example.sjsugo.navigation_feedback"
+              android:label="navigation_feedback" tools:layout="@layout/navigation_feedback"/>
 </navigation>
