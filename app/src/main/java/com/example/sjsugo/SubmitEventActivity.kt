@@ -4,39 +4,72 @@ import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.EventLogTags
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.google.firebase.FirebaseApp
 import kotlinx.android.synthetic.main.activity_submit_event.*
+import java.io.ByteArrayOutputStream
 import java.util.jar.Manifest
 
-//        TO DO:
+//        TODO:
 //                1. When picture is taken it will store into the cloud firestore.
 //                2. Submit button that will allow it to store
 //                3. Should we display the image activity?
 
 class SubmitEventActivity : AppCompatActivity() {
 
-
-    private val PERMISSION_CODE = 1000;
+    //private StorageReference mStorage;
+    private val PERMISSION_CODE = 1000
     private val IMAGE_CAPTURE_CODE = 1001
+    private val SELECT_PICUTRE = 1002
+    private val PERMISSION_GALLERY_CODE = 1003
     var image_uri: Uri? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_submit_event)
 
+        //mStorage = FirebaseApp.getInstance().getReference();
+
+        // Obtain file from gallery
+        val galleryBtn = findViewById<ImageButton>(R.id.gallery_button)
+        galleryBtn.setOnClickListener{
+            // If system OS is Marshmallow or above, we need to request runtime permission
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                    //permission was not enabled
+                    val permission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    //show pop up to request permission
+                    requestPermissions(permission, PERMISSION_GALLERY_CODE)
+                } else {
+                    openGallery()
+                }
+            } else {
+                openGallery()
+            }
+        }
+
         // This will take it back to Dashboard
         val cancelBtn = findViewById<Button>(R.id.cancel_button)
         cancelBtn.setOnClickListener{startActivity(Intent(this, DashboardActivity::class.java))}
 
-        // Button Click
+        // Camera Button; Will open the camera.
         val cameraBtn = findViewById<ImageButton>(R.id.camera_button)
         cameraBtn.setOnClickListener{
             // If system OS is Marshmallow or Above, we need to request runtime permission
@@ -60,6 +93,9 @@ class SubmitEventActivity : AppCompatActivity() {
                 openCamera()
             }
         }
+
+        val submitBtn = findViewById<Button>(R.id.submit_button)
+        submitBtn.setOnClickListener{ dosubmitevent() }
     }
 
     private fun openCamera() {
@@ -71,6 +107,17 @@ class SubmitEventActivity : AppCompatActivity() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+    }
+
+    private fun openGallery(){
+        //gallery intent
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, SELECT_PICUTRE)
+    }
+
+    private fun dosubmitevent(){
+        //TODO: figure out how to submit events from the image view to Cloud
+
     }
 
     override fun onRequestPermissionsResult(
@@ -90,14 +137,30 @@ class SubmitEventActivity : AppCompatActivity() {
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
             }
+            PERMISSION_GALLERY_CODE -> {
+                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    // Permission from popup was granted
+                    openGallery()
+                }
+                else{
+                    // Permission from popup was denied
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         // Called when image was capture from camera intent
-        if(resultCode == Activity.RESULT_OK){
-//            // Set image captured to image view
-//            image_view.setImageURI(image_uri)
+        if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_CAPTURE_CODE){
+            // Set image captured to image view
+            imageView.setImageURI(image_uri)
+        }
+        // Result code is RESULT_OK only if the user selects an Image
+        else if(resultCode == Activity.RESULT_OK && requestCode == SELECT_PICUTRE){
+            image_uri = data?.getData()
+            imageView.setImageURI(image_uri)
         }
     }
 }

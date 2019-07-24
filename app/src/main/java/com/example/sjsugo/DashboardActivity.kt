@@ -27,6 +27,9 @@ class DashboardActivity : AppCompatActivity() {
         Log.d("Info:", "something: "+ actualName)
         findViewById<TextView>(R.id.dashboard_welcome).text = "Welcome " + actualName + "!"
 
+        val addeventBtn = findViewById<Button>(R.id.add_event_button)
+        addeventBtn.setOnClickListener { startActivity(Intent(this, SubmitEventActivity::class.java))}
+
     }
     override fun onBackPressed() {
         //do nothing

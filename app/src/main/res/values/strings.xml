@@ -42,6 +42,13 @@
         <item>2011</item>
         <item>2010</item>
     </string-array>
+
+    <string-array name="events_GOprogram">
+        <item>Career Fair</item>
+        <item>Intel Event</item>
+        <item>Concert</item>
+        <item>Engineering Event</item>
+    </string-array>
     <string name="title_activity_test">test</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
