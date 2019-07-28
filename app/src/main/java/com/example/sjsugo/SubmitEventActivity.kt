@@ -1,6 +1,7 @@
 package com.example.sjsugo
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
@@ -13,15 +14,20 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.EventLogTags
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.firebase.FirebaseApp
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import kotlinx.android.synthetic.main.activity_submit_event.*
 import java.io.ByteArrayOutputStream
 import java.util.jar.Manifest
@@ -33,19 +39,17 @@ import java.util.jar.Manifest
 
 class SubmitEventActivity : AppCompatActivity() {
 
-    //private StorageReference mStorage;
+    lateinit var storage: FirebaseStorage
+
     private val PERMISSION_CODE = 1000
     private val IMAGE_CAPTURE_CODE = 1001
     private val SELECT_PICUTRE = 1002
     private val PERMISSION_GALLERY_CODE = 1003
     var image_uri: Uri? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_submit_event)
-
-        //mStorage = FirebaseApp.getInstance().getReference();
 
         // Obtain file from gallery
         val galleryBtn = findViewById<ImageButton>(R.id.gallery_button)
@@ -95,7 +99,26 @@ class SubmitEventActivity : AppCompatActivity() {
         }
 
         val submitBtn = findViewById<Button>(R.id.submit_button)
-        submitBtn.setOnClickListener{ dosubmitevent() }
+        submitBtn.setOnClickListener{
+            var storageRef = storage.reference
+            storageRef = FirebaseStorage.getInstance().getReference()
+
+            if(image_uri == null){
+                //this image view is empty
+                Toast.makeText(this, "No image!", Toast.LENGTH_SHORT).show()
+            } else {
+                //TODO: Upload to cloud!
+                //The imageView is occupied
+//                StorageReference filepath = storageRef.child("Photos").child(image_uri.getLastPathSegment())
+//
+//                filepath.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+//                    @Override
+//                    public void onSuccess(UploadTask.)
+//                }
+
+                Toast.makeText(this, "Uploading Finished ...!", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun openCamera() {
@@ -115,10 +138,12 @@ class SubmitEventActivity : AppCompatActivity() {
         startActivityForResult(galleryIntent, SELECT_PICUTRE)
     }
 
-    private fun dosubmitevent(){
-        //TODO: figure out how to submit events from the image view to Cloud
-
-    }
+//    private fun submitEvent(){
+//        //TODO: figure out how to submit events from the image view to Cloud
+//        if (imageView.getDrawable() == null){
+//            Toast.makeText(this, "No image!", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -164,3 +189,4 @@ class SubmitEventActivity : AppCompatActivity() {
         }
     }
 }
+
