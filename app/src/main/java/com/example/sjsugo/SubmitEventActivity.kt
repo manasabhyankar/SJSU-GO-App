@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import kotlinx.android.synthetic.main.activity_submit_event.*
 import java.io.ByteArrayOutputStream
+import java.util.*
 import java.util.jar.Manifest
 
 //        TODO:
@@ -50,6 +51,7 @@ class SubmitEventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_submit_event)
+        //val storage = FirebaseStorage.getInstance()
 
         // Obtain file from gallery
         val galleryBtn = findViewById<ImageButton>(R.id.gallery_button)
@@ -100,23 +102,13 @@ class SubmitEventActivity : AppCompatActivity() {
 
         val submitBtn = findViewById<Button>(R.id.submit_button)
         submitBtn.setOnClickListener{
-            var storageRef = storage.reference
-            storageRef = FirebaseStorage.getInstance().getReference()
-
             if(image_uri == null){
                 //this image view is empty
                 Toast.makeText(this, "No image!", Toast.LENGTH_SHORT).show()
             } else {
-                //TODO: Upload to cloud!
-                //The imageView is occupied
-//                StorageReference filepath = storageRef.child("Photos").child(image_uri.getLastPathSegment())
-//
-//                filepath.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-//                    @Override
-//                    public void onSuccess(UploadTask.)
-//                }
-
                 Toast.makeText(this, "Uploading Finished ...!", Toast.LENGTH_LONG).show()
+                uploadImage()
+                startActivity(Intent(this, DashboardActivity::class.java))
             }
         }
     }
@@ -137,14 +129,22 @@ class SubmitEventActivity : AppCompatActivity() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, SELECT_PICUTRE)
     }
+    private fun uploadImage(){
+        val storage = FirebaseStorage.getInstance()
+        var storageRef = storage.reference
+        val imageViewRef = storageRef.child("image.jgp")
+        val imageView_imageRef = storageRef.child("image/image.jpg")
+        imageViewRef.name == imageView_imageRef.name
+        imageViewRef.path == imageView_imageRef.path
+        imageView.isDrawingCacheEnabled = true
+        imageView.buildDrawingCache()
+        val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
 
-//    private fun submitEvent(){
-//        //TODO: figure out how to submit events from the image view to Cloud
-//        if (imageView.getDrawable() == null){
-//            Toast.makeText(this, "No image!", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
+    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
