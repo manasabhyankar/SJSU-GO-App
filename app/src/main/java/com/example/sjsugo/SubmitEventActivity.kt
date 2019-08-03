@@ -14,6 +14,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -30,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import kotlinx.android.synthetic.main.activity_submit_event.*
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.*
 import java.util.jar.Manifest
 
@@ -106,17 +108,15 @@ class SubmitEventActivity : AppCompatActivity() {
                 //this image view is empty
                 Toast.makeText(this, "No image!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Uploading Finished ...!", Toast.LENGTH_LONG).show()
                 uploadImage()
-                startActivity(Intent(this, DashboardActivity::class.java))
             }
         }
     }
 
     private fun openCamera() {
         val values = ContentValues()
-        values.put(MediaStore.Images.Media.TITLE, "New Picture")
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+        values.put(MediaStore.Images.Media.TITLE, "camperaImage")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From camera")
         image_uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         //camera intent
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -126,24 +126,55 @@ class SubmitEventActivity : AppCompatActivity() {
 
     private fun openGallery(){
         //gallery intent
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, SELECT_PICUTRE)
+//        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+//        startActivityForResult(galleryIntent, SELECT_PICUTRE)
+        val gIntent = Intent().apply {
+            type = "image/*"
+            action = Intent.ACTION_GET_CONTENT
+        }
+        startActivityForResult(Intent.createChooser(gIntent, "Select Picture"),SELECT_PICUTRE)
     }
     private fun uploadImage(){
-        val storage = FirebaseStorage.getInstance()
-        var storageRef = storage.reference
-        val imageViewRef = storageRef.child("image.jgp")
-        val imageView_imageRef = storageRef.child("image/image.jpg")
-        imageViewRef.name == imageView_imageRef.name
-        imageViewRef.path == imageView_imageRef.path
-        imageView.isDrawingCacheEnabled = true
-        imageView.buildDrawingCache()
-        val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show()
-
+        val progress = ProgressDialog(this).apply {
+            setTitle("Uploading...")
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+            show()
+        }
+        val pData = FirebaseStorage.getInstance()
+        var countdown = 0.0
+        var storage = pData.getReference().child("myimage.jpg").putFile(image_uri!!)
+            .addOnSuccessListener{ taskSnapshot -> progress.dismiss()
+                //TODO: the comment one from this section, do not work, but this important to upload
+                //val uri = taskSnapshot.downloadUrl
+                Toast.makeText(this, "DONE!", Toast.LENGTH_SHORT).show()
+                //Glide.with(this@StorageActivity).load(uri).into(image)
+                startActivity(Intent(this, DashboardActivity::class.java))
+            }
+            .addOnProgressListener { takeSnapshot ->
+                countdown = ((100.0 * takeSnapshot.bytesTransferred) / takeSnapshot.totalByteCount)
+                Log.v("countdown", "countdown=="+countdown)
+                progress.setMessage("Uploaded... " + countdown.toInt() + "%")
+                //TODO: THIS COUNT DOWN DOESN'T WORK WHICH MEANS THAT IT IS NEVER UPLOADING
+                //startActivity(Intent(this, DashboardActivity::class.java))
+            }
+            .addOnFailureListener{
+                exception -> exception.printStackTrace()
+            }
+        //TODO: This works, don't delete
+//        if(image_uri != null) {
+//            val progressDialog: ProgressDialog = ProgressDialog(this)
+//            progressDialog.setTitle("Uploading...")
+//            progressDialog.show()
+//            val storage = FirebaseStorage.getInstance()
+//            var storageRef = storage.getReference()
+//            val ref: StorageReference
+//            ref = storageRef.child("camperaImage/" + UUID.randomUUID().toString())
+//            ref.putFile(image_uri!!).addOnProgressListener {
+//
+//            }
+//        }
+        Toast.makeText(this, "Uploaded Done!", Toast.LENGTH_LONG).show()
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -185,6 +216,12 @@ class SubmitEventActivity : AppCompatActivity() {
         // Result code is RESULT_OK only if the user selects an Image
         else if(resultCode == Activity.RESULT_OK && requestCode == SELECT_PICUTRE){
             image_uri = data?.getData()
+//            try{
+//                val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, image_uri)
+//                imageView.setImageBitmap(bitmap)
+//            } catch (IOException e) {
+//                e.printStackTrace()
+//            }
             imageView.setImageURI(image_uri)
         }
     }
