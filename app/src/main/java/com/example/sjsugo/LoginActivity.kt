@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         updateUI(currentUser)
     }
 
-
     fun updateUI(user: FirebaseUser?) {
         //TODO: Add user details to dashboard activity based on login status
         if (user != null) {
@@ -48,10 +47,8 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(dashIntent)
                         finish()
                     }
-
                 }
             }
-
         }
     }
 
@@ -73,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
                                 val document = task.result
                                 if (document != null) {
                                     firstName = document.get("first_name").toString()
+                                    Log.d("First name", firstName.toString())
                                     val dashIntent = Intent(this, DashboardActivity::class.java)
                                     dashIntent.putExtra("userName", firstName.capitalize())
                                     startActivity(dashIntent)
@@ -81,8 +79,8 @@ class LoginActivity : AppCompatActivity() {
                                     Log.d("Info: ", "No such document")
                                 }
                             }
-
                         }
+
 
                     } else {
                         Log.d("Failure", "didn't work")

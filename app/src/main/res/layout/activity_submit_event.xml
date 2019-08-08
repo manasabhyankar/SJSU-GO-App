@@ -15,7 +15,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:background="#0FFFFFFF"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textColor="#00BCD4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,11 +75,11 @@
             app:layout_constraintTop_toBottomOf="@+id/selection_event" />
 
     <TextView
-            android:id="@+id/attachment "
+            android:id="@+id/attachment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Attach photo/file evidence:"
+            android:text="@string/attach_photo_file_evidence"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/attachment "
+            app:layout_constraintTop_toBottomOf="@+id/attachment"
             app:srcCompat="@mipmap/ic_launcher_foreground" />
 
 

@@ -3,4 +3,5 @@
 
     <color name="button_color">#0056A2</color>
     <color name="button_text_color">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 </resources>

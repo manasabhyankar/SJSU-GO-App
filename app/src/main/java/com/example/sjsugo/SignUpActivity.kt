@@ -3,6 +3,7 @@ package com.example.sjsugo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -65,12 +66,8 @@ class SignUpActivity : AppCompatActivity() {
         finish()
     }
 
-    fun updateUI(user: FirebaseUser?) {
-        //TODO: Add user details to dashboard activity based on login status
-    }
-
     private fun doSignUp() {
-        //TODO: Add additional user details to Firestore (name, email, etc)
+        //TODO: add @email.com patterns for error checking
         val error_prompt = AlertDialog.Builder(this)
         error_prompt.setTitle("Incorrect email")
         error_prompt.setMessage("That email is already in use!")
@@ -89,7 +86,11 @@ class SignUpActivity : AppCompatActivity() {
             last_name.text.toString().isEmpty()
         ) {
             Toast.makeText(this, "One or more fields is empty. Please fill them all out.", Toast.LENGTH_SHORT).show()
-        } else {
+        }
+        else if(!(signup_email.text.toString().contains("@sjsu.edu"))){
+            Toast.makeText(this, "Please enter a valid SJSU email!", Toast.LENGTH_SHORT).show()
+        }
+        else {
             //Attempt authentication query.
             val id = signup_id.text.toString()
             val email = signup_email.text.toString()
@@ -103,25 +104,44 @@ class SignUpActivity : AppCompatActivity() {
                             "email" to email,
                             "student_id" to id,
                             "first_name" to firstname,
-                            "last_name" to lastname
+                            "last_name" to lastname,
+                            "current_points" to 0
                         )
+                        val dummy = hashMapOf(
+                            "event_name" to "dummy"
+                        )
+                        //Once signup finishes, make user data entry to Firestore
                         firebaseFirestore.collection("users").document(email).set(user)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Successfully created account. Welcome!", Toast.LENGTH_SHORT)
-                                    .show()
+                                firebaseFirestore.collection("users").document(email).collection("event_submissions")
+                                    .document("dummy").set(dummy).addOnSuccessListener {
+                                        Toast.makeText(
+                                            this,
+                                            "Successfully created account. Welcome!",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            this,
+                                            "Unable to add user data to Firestore. Please try again later!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                             }
                             .addOnFailureListener {
                                 Toast.makeText(
                                     this,
-                                    "Unable to add user data to Firestore. Please try again later!",
+                                    "Unable to create new user account. Please try again.",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
+
                         val dashIntent = Intent(this, DashboardActivity::class.java)
                         dashIntent.putExtra("userName", firstname.capitalize())
                         startActivity(dashIntent)
                         finish()
-
                     } else {
                         if (task.exception is FirebaseAuthUserCollisionException) {
                             error_prompt.show()
@@ -129,7 +149,6 @@ class SignUpActivity : AppCompatActivity() {
                         } else {
                             //Toast.makeText(this, task.exception., Toast.LENGTH_SHORT).show()
                             Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show()
-                            updateUI(null)
                         }
                     }
 

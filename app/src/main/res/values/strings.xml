@@ -14,7 +14,7 @@
     <string name="sjsu_year">Academic Year</string>
     <string name="log_out">Log Out</string>
     <string name="add_event">Add Event</string>
-    <string name="passing"></string>
+    <string name="action_settings">Blah</string>
     <string-array name="department_major">
         <item>Aerospace Engineering</item>
         <item>Aviation and Technology</item>
@@ -54,4 +54,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_feedback">Feedback</string>
+    <string name="attach_photo_file_evidence">Attach photo/file evidence:</string>
+    <string name="submit">Submit</string>
 </resources>
